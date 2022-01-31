@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block title %} {{ movie.title }} {% endblock %} {%
+block content %}
+<div class="image-backdrop">
+  <img
+    src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
+    alt="{{ movie.poster_path }}"
+    width="300px;"
+  />
+</div>
+{{ movie.title }} {{ movie.overview }} {% for genre in movie.genres %} {{
+genre["name"] }} {% endfor %} {% endblock %}
