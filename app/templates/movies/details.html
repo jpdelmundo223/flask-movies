@@ -1,11 +1,62 @@
-{% extends 'base.html' %} {% block title %} {{ movie.title }} {% endblock %} {%
-block content %}
-<div class="image-backdrop">
-  <img
-    src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}"
-    alt="{{ movie.poster_path }}"
-    width="300px;"
-  />
-</div>
-{{ movie.title }} {{ movie.overview }} {% for genre in movie.genres %} {{
-genre["name"] }} {% endfor %} {% endblock %}
+{% extends 'base.html' %}
+{% block title %} 
+  {{ movie.title }} 
+{% endblock %} 
+{% block content %}
+  <div >
+    <section class="content">
+      <div class="movie-trailer">
+        <iframe src="{{ trailer }}" frameborder="0" width="100%" height="700" marginheight="0">{{ trailer }}</iframe>
+      </div>
+    </section>
+    <div class="ui grid content container">
+      <section class="five wide column movie-poster">
+        <img
+          src="https://image.tmdb.org/t/p/w300{{movie.poster_path}}"
+          alt="{{ movie.poster_path }}"
+          width="auto"
+        />
+      </div>
+      <div class="ten wide column movie-info">
+        <div class="movie-title">{{ movie.title }}
+          {% for genre in movie.genres %}
+            <div class="movie-genres">
+                {{ genre["name"] }} 
+            </div>
+          {% endfor %}
+        </div>
+        <div class="movie-overview">{{ movie.overview }}</div>
+        <div class="ui grid">
+          <div class="row">
+            <div class="movie-release-date four wide column">
+              Release Date:
+            </div>
+            <div class="five wide column">
+              {{ movie.release_date }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="movie-countries four wide column ">
+                Country:
+            </div>
+            <div class="ten wide column">
+              {% for country in movie.production_countries %}
+                {{ country["name"] }}
+              {% endfor %}
+            </div>
+          </div>
+          <div class="movie-languages">
+            <span>
+              Country:
+            </span>
+            {% for languages in movie.spoken_languages %}
+              {{ languages["english_name"] }}
+            {% endfor %}
+          </div>
+          <div class="movie-release-date"> {{ movie.runtime }}</div>
+          <div class="movie-release-date"><span>Status:</span> {{ movie.status }}</div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}

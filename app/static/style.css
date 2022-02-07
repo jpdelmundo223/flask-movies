@@ -55,8 +55,9 @@ i {
   color: #ff5b84;
 }
 h1 {
-  font-size: 170%;
-  position: relative;
+  font-size: 180%;
+  position: absolute;
+  top: 250px;
   z-index: 10;
 }
 span {
@@ -67,6 +68,9 @@ span {
   color: rgb(210, 210, 210);
 }
 .watch {
+  width: 150px;
+  height: 50px;
+  font-size: 16px;
   display: block;
   border: 1px solid white;
   border-radius: 4px;
@@ -80,6 +84,7 @@ span {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   transition: all 0.2s;
+  top: 370px;
 }
 .watch:hover {
   background: rgba(255, 255, 255, 0.8);
@@ -91,9 +96,86 @@ span {
   transform: translateY(2px);
 }
 p {
-  position: relative;
+  position: absolute;
   z-index: 10;
-  font-size: 0.8em;
+  font-size: 15px;
   width: 60%;
   height: 35%;
+  top: 300px;
+}
+
+.movie-details {
+  text-align: center;
+}
+.movie-poster {
+  height: auto;
+  margin: 20px 0;
+  position: relative;
+}
+
+.movie-title {
+  font-size: 25px;
+}
+
+.content {
+  line-height: 1.5em;
+}
+
+.movie-genres {
+  color: #ffffff;
+  background-color: grey;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  display: inline;
+  margin: 5px;
+  font-size: 12px;
+}
+
+.movie-genres:hover {
+  background-color: rgb(184, 184, 184);
+}
+
+.movie-info {
+  width: 70%;
+  margin-top: 20px;
+}
+
+.movie-trailer {
+  margin-top: 70px;
+  position: relative;
+}
+
+@media (max-width: 1201px) {
+  iframe {
+    height: 200;
+  }
+
+  .movie-poster img {
+    width: 250px;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  iframe {
+    height: 200;
+  }
+
+  .movie-poster img {
+    width: 200px;
+  }
+}
+
+@media (max-width: 696px) {
+  iframe {
+    height: 200;
+  }
+
+  .movie-poster img {
+    width: 130px;
+  }
 }
