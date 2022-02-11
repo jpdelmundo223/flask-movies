@@ -25,7 +25,7 @@ $(document).ready(function () {
   $(".owl-carousel-trending").owlCarousel({
     loop: false,
     margin: 10,
-    dots: false,
+    dots: true,
     responsiveClass: true,
     responsive: {
       0: {
@@ -40,4 +40,8 @@ $(document).ready(function () {
       },
     },
   });
+});
+
+$(".message .close").on("click", function () {
+  $(this).closest(".message").transition("fade");
 });
