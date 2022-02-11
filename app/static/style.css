@@ -1,6 +1,6 @@
 .container {
   margin: 0 auto;
-  max-width: 90%;
+  max-width: 95%;
 }
 
 @keyframes movie {
@@ -146,6 +146,10 @@ p {
   position: relative;
 }
 
+footer {
+  height: 50px;
+}
+
 @media (max-width: 1201px) {
   iframe {
     height: 200;
@@ -153,10 +157,6 @@ p {
 
   .movie-poster img {
     width: 250px;
-  }
-
-  .container {
-    max-width: 100%;
   }
 }
 
