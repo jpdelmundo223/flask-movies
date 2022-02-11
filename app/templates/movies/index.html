@@ -1,146 +1,119 @@
-{% extends 'base.html' %} {% block title %} Homepage {% endblock %} {% block
-content %}
-<style>
-  .hidden.menu {
-    display: none;
-  }
-
-  .masthead.segment {
-    min-height: 800px;
-    padding: 1em 0em;
-  }
-  .masthead .logo.item img {
-    margin-right: 1em;
-  }
-  .masthead .ui.menu .ui.button {
-    margin-left: 0.5em;
-  }
-  .masthead h1.ui.header {
-    margin-top: 3em;
-    margin-bottom: 0em;
-    font-size: 4em;
-    font-weight: normal;
-  }
-  .masthead h2 {
-    font-size: 1.7em;
-    font-weight: normal;
-  }
-
-  .ui.vertical.stripe {
-    padding: 8em 0em;
-  }
-  .ui.vertical.stripe h3 {
-    font-size: 2em;
-  }
-  .ui.vertical.stripe .button + h3,
-  .ui.vertical.stripe p + h3 {
-    margin-top: 3em;
-  }
-  .ui.vertical.stripe .floated.image {
-    clear: both;
-  }
-  .ui.vertical.stripe p {
-    font-size: 1.33em;
-  }
-  .ui.vertical.stripe .horizontal.divider {
-    margin: 3em 0em;
-  }
-
-  .quote.stripe.segment {
-    padding: 0em;
-  }
-  .quote.stripe.segment .grid .column {
-    padding-top: 5em;
-    padding-bottom: 5em;
-  }
-
-  .footer.segment {
-    padding: 5em 0em;
-  }
-
-  .secondary.pointing.menu .toc.item {
-    display: none;
-  }
-</style>
-<section class="showcase" style="margin-top: 10px">
-  <div class="owl-carousel-showcase owl-carousel owl-theme">
-    {% for movie in popular %}
-    <div
-      class="movie-card"
-      style="background-image: url('https://image.tmdb.org/t/p/original{{ movie.backdrop_path }}')"
-    >
-      <h1>{{ movie.title }}</h1>
-      <p class="sypnosis">{{ movie.overview }}</p>
-      <button class="watch">Watch Trailer</button>
-    </div>
-    {% endfor %}
+{% extends 'base.html' %} 
+{% block title %} 
+  Homepage 
+{% endblock %} 
+{% block content %}
+  <div style="margin-top: 80px;">
+    <!-- Applies margin at the top -->
   </div>
-</section>
-<section class="popular-movies">
   <div class="container">
-    <h3 class="ui dividing header">Popular Movies</h3>
-    <div class="ui link cards" >
-      {% for movie in popular %}
-      <div class="card">
-        <div class="blurring dimmable image">
-          <div class="ui dimmer">
-            <div class="content">
-              <span id="movieId" style="display: none">{{ movie.id }}</span>
-              <div class="center">
-                <div
-                  class="ui inverted button"
-                  href="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
-                >
-                  View Details
+    <section class="popular-movies">
+      <h3 class="ui dividing header">Popular Movies</h3>
+      <div class="ui special cards" >
+        {% for movie in popular %}
+          <div class="card">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <span id="movieId" style="display: none">{{ movie.id }}</span>
+                  <div class="center">
+                    <a href="{{ url_for('views.movie_details', movie_id=movie.id) }}">
+                    <div
+                      class="ui inverted button"
+                      href="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                    >
+                      View Details
+                    </div>
+                  </a> 
+                  </div>
                 </div>
+              </div>
+              <img
+                src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                alt="{{ movie.poster_path }}"
+              />
+            </div>
+            <div class="content">
+              <a
+                class="header"
+                href="{{ url_for('views.movie_details', movie_id=movie.id) }}"
+                >{{ movie.title }}</a
+              >
+              <div class="meta">
+                <span class="date"
+                  >Date released: {{ movie.release_date[0:4] }}</span
+                >
               </div>
             </div>
           </div>
-          <img
-            src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
-            alt="{{ movie.poster_path }}"
-          />
-        </div>
-        <div class="content">
-          <a
-            class="header"
-            href="{{ url_for('views.movie_details', movie_id=movie.id) }}"
-            >{{ movie.title }}</a
-          >
-          <div class="meta">
-            <span class="date"
-              >Date released: {{ movie.release_date[0:4] }}</span
-            >
-          </div>
-        </div>
+        </a>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-<br />
-<br />
-<!-- Set up your HTML -->
-<section class="trending-movies">
-  <div class="container">
-    <h3 class="ui dividing header">Trending Movies</h3>
-    <div class="owl-carousel-trending owl-carousel owl-theme">
-        {% for movie in toprated %}
-        <div class="ui card">
-          <div class="image">
-            <img
-              src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
-              alt="{{ movie.poster_path }}"
-              width="150px;"
-              
-            />
+    </section>
+    <br />
+    <br />
+    <section class="trending-movies">
+      <h3 class="ui dividing header">Top-Rated Movies</h3>
+      <div class="owl-carousel-trending owl-carousel owl-theme">
+          {% for movie in toprated %}
+          <div class="ui card">
+            <div class="image">
+              <img
+                src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}"
+                alt="{{ movie.poster_path }}"
+                width="150px;"
+                
+              />
+            </div>
+            <div class="content">
+              <a class="header" href="{{ url_for('views.movie_details', movie_id=movie.id) }}" style="font-size: 12px;">{{ movie.title }}</a>
+            </div>
           </div>
-          <div class="content">
-            <a class="header" href="{{ url_for('views.movie_details', movie_id=movie.id) }}" style="font-size: 12px;">{{ movie.title }}</a>
+        {% endfor %}
+      </div>
+    </section>
+    <section class="popular-movies">
+      <h3 class="ui dividing header">Upcoming Movies</h3>
+      <div class="ui special cards" >
+        {% for movie in upcoming %}
+          <div class="card">
+            <div class="blurring dimmable image">
+              <div class="ui dimmer">
+                <div class="content">
+                  <span id="movieId" style="display: none">{{ movie.id }}</span>
+                  <div class="center">
+                    <a href="{{ url_for('views.movie_details', movie_id=movie.id) }}">
+                    <div
+                      class="ui inverted button"
+                      href="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                    >
+                      View Details
+                    </div>
+                  </a> 
+                  </div>
+                </div>
+              </div>
+              <img
+                src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                alt="{{ movie.poster_path }}"
+              />
+            </div>
+            <div class="content">
+              <a
+                class="header"
+                href="{{ url_for('views.movie_details', movie_id=movie.id) }}"
+                >{{ movie.title }}</a
+              >
+              <div class="meta">
+                <span class="date"
+                  >Date released: {{ movie.release_date[0:4] }}</span
+                >
+              </div>
+            </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
+        </a>
+        {% endfor %}
+      </div>
+    </section>
   </div>
-</section>
 {% endblock %}
