@@ -17,7 +17,7 @@ def create_app():
     login_manager = LoginManager()
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
-        
+
     from .models import Users
     
     init_db(app)
@@ -31,6 +31,10 @@ def create_app():
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
+
+    # https://stackoverflow.com/questions/6036082/call-a-python-function-from-jinja2
+    from .request import get_movie_genres
+    app.jinja_env.globals.update(get_movie_genres=get_movie_genres)
 
     return app
 

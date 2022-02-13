@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    Login
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <form method="POST" class="ui form" style="margin-top: 85px;">
+            {{ form.csrf_token }}
+            {% for message in get_flashed_messages() %}
+                {% if message %}
+                    <div class="ui red message">
+                        <div>
+                            {{ message }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <h4 class="ui dividing header">
+                Login
+            </h4>
+            <div class="ui form">
+                <div class="field">
+                    {{ form.email.label(class="label") }}
+                    {{ form.email(placeholder="Enter you email", autofocus="") }}
+                </div>
+                <div class="field">
+                    {{ form.password.label(class="label") }}
+                    {{ form.password(placeholder="Enter your password") }}
+                </div>
+                <div class="field">
+                    <div class="ui checkbox">
+                        {{ form.remember_me(class="hidden") }}
+                        {{ form.remember_me.label(class="label") }}
+                    </div>
+                </div>
+                {{ form.submit(class="ui button") }}
+            </div>
+        </form>
+        <div class="ui message">
+            Create an account? <a href="{{ url_for('auth.sign_up') }}">Sign up here</a>.
+        </div>
+    </div>
+{% endblock %}

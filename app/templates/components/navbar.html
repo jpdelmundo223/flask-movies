@@ -2,16 +2,12 @@
   <div class="header item">Movie Browser</div>
   <a class="active item" href="{{ url_for('views.index') }}">Home</a>
     <div class="ui dropdown item">
-      Dropdown
+      Genres
       <i class="dropdown icon"></i>
       <div class="menu">
-        <div class="item">Action</div>
-        <div class="item">Another Action</div>
-        <div class="item">Something else here</div>
-        <div class="divider"></div>
-        <div class="item">Separated Link</div>
-        <div class="divider"></div>
-        <div class="item">One more separated link</div>
+        {% for genre in get_movie_genres()['genres'] %}
+          <a href="#" class="item">{{ genre['name'] }}</a>
+        {% endfor %}
       </div>
     </div>
     <div class="right menu">

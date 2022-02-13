@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %}  
+    Sign Up
+{% endblock %}
+{% block content %} 
+    <div class="container">
+        <form method="POST" class="ui form" style="margin-top: 85px;">
+            {{ form.csrf_token }}
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% if status == 0 %}
+                        <div class="ui red message">
+                            <div class="header">
+                                There were some errors with your submission.
+                            </div>
+                            <ul class="list">
+                                {% for category, error in get_flashed_messages(with_categories=true) %}
+                                    {% if category != "custom" %}
+                                        <li>
+                                            {{ ', '.join(error) }}
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            {{ error }}
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% else %}
+                        <div class="ui green message">
+                            {% for message in get_flashed_messages() %}
+                                <div class="header">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <span>Click <a href="{{ url_for('auth.login') }}">here</a> to login.</span>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endwith %}
+            <h4 class="ui dividing header">Sign Up</h4>
+            <div class="field">
+                <div class="two fields">
+                    <div class="field">
+                        {{ form.first_name.label }}
+                        {{ form.first_name(placeholder="Your first name", autofocus="") }}
+                    </div>
+                    <div class="field">
+                        {{ form.last_name.label }}
+                        {{ form.last_name(placeholder="Your last name") }}
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                {{ form.email.label }}
+                {{ form.email(placeholder="Enter your email") }}
+            </div>
+            <div class="field">
+                <div class="two fields">
+                    <div class="field">
+                        {{ form.password.label }}
+                        {{ form.password(placeholder="Enter a password") }}
+                    </div>
+                    <div class="field">
+                        {{ form.confirm_password.label }}
+                        {{ form.confirm_password(placeholder="Confirm your password") }}
+                    </div>
+                </div>
+            </div>
+            {{ form.submit(class="ui button", formnovalidate=true) }}
+        </form>
+        <div class="ui message">
+            Already signed up? <a href="{{ url_for('auth.login') }}">Login here</a> instead.
+        </div>
+    </div>
+{% endblock %}

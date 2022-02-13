@@ -16,7 +16,7 @@
           {% block content %}
           {% endblock %}
   <footer class="footer">
-      
+    {{ genre_list }}
   </footer>
   </body>
   <script src="{{ url_for('static', filename='jquery/jquery-3.6.0.js') }}"></script>
@@ -25,5 +25,5 @@
   <script src="{{ url_for('static', filename='owl-carousel/dist/owl.carousel.min.js') }}"></script>
   <script>
     
-    </script>
+  </script>
 </html>

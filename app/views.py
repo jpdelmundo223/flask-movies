@@ -1,20 +1,25 @@
-from flask import Blueprint, render_template, abort, jsonify
-from .request import Movies
-from .utils import get_movie_trailer
+from flask import Blueprint, render_template, abort, jsonify, g, session
+from .request import get_movie, get_movie_details, get_movie, get_movie_genres, sample_func
+from .utils import get_trailer
+
+genre_list = []
 
 views = Blueprint('views', __name__)
-m = Movies()
 
 @views.route('/test_json')
 def test():
-    return m.get_movie("popular")
+    return get_movie("popular")
 
 @views.route('/')
-def index():
-    get_popular_movies = m.get_movie("popular")
-    get_toprated_movies = m.get_movie("top_rated")
-    get_upcoming_movies = m.get_movie("upcoming")
-    return render_template('movies/index.html', popular=get_popular_movies['results'], toprated=get_toprated_movies['results'])
+def index():    
+    genres = get_movie_genres()['genres']
+    for index in range(len(genres)):
+        genre_list.append(genres[index]['name'])
+    print(genre_list)
+    get_popular_movies = get_movie("popular")
+    get_toprated_movies = get_movie("top_rated")
+    get_upcoming_movies = get_movie("upcoming")
+    return render_template('movies/index.html', popular=get_popular_movies['results'], toprated=get_toprated_movies['results'], upcoming=get_upcoming_movies['results'])
 
 # @views.route('/image')
 # def details():
@@ -24,11 +29,11 @@ def index():
 @views.route('/movie/<int:movie_id>')
 def movie_details(movie_id):
     try:
-        movie = m.get_movie_details(movie_id)
+        movie = get_movie_details(movie_id)
     except:
         abort(404)
         
-    video = m.get_movie_details(movie_id)
+    video = get_movie_details(movie_id)
     print(video)
     # trailer = ""
     # if video['results']['type'] == 'Trailer':
@@ -36,7 +41,7 @@ def movie_details(movie_id):
 
     # print(trailer)
 
-    trailer = get_movie_trailer(movie_id)
+    trailer = get_trailer(movie_id)
     
     return render_template('movies/details.html', movie=movie, trailer=trailer)
 
