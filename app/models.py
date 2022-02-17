@@ -5,6 +5,7 @@ from datetime import datetime
 from flask_login import UserMixin
 
 class Users(db.Model, UserMixin):
+    """Model class"""
     __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     email = Column(String(30), unique=True, nullable=False)
