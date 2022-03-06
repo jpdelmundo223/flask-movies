@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, abort, jsonify, g, session
-from .request import get_movie, get_movie_details, get_movie, get_movie_genres, sample_func
+from re import T
+from flask import Blueprint, render_template, abort, jsonify, g, session, request
+from .request import get_casts, get_movie, get_movie_details, get_movie, get_movie_genres, sample_func, search_movie, get_movie_trailer
 from .utils import get_trailer
 
 genre_list = []
@@ -21,11 +22,6 @@ def index():
     get_upcoming_movies = get_movie("upcoming")
     return render_template('movies/index.html', popular=get_popular_movies['results'], toprated=get_toprated_movies['results'], upcoming=get_upcoming_movies['results'])
 
-# @views.route('/image')
-# def details():
-#     movie_image = m.get_image("bcCBq9N1EMo3daNIjWJ8kYvrQm6.jpg", "w500")
-#     return f'<img src="{movie_image}" />'
-
 @views.route('/movie/<int:movie_id>')
 def movie_details(movie_id):
     try:
@@ -33,15 +29,13 @@ def movie_details(movie_id):
     except:
         abort(404)
         
-    video = get_movie_details(movie_id)
-    print(video)
-    # trailer = ""
-    # if video['results']['type'] == 'Trailer':
-    #     trailer = "https://www.youtube.com/watch?v={}".format(video['results']['key'])
-
-    # print(trailer)
-
-    trailer = get_trailer(movie_id)
+    casts = get_casts(movie_id)
     
-    return render_template('movies/details.html', movie=movie, trailer=trailer)
+    videos = get_movie_trailer(movie_id)['results']
+    
+    return render_template('movies/details.html', movie=movie, videos=videos, casts=casts)
 
+@views.route('/movie/search/<string:keyword>')
+def movie_search(keyword):
+    result = search_movie(keyword)['results']
+    return render_template('movies/search.html', keyword=keyword, result=result)
