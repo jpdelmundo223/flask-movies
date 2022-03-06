@@ -1,32 +1,41 @@
-<div class="ui top fixed inverted menu">
-  <div class="header item">Movie Browser</div>
-  <a class="active item" href="{{ url_for('views.index') }}">Home</a>
-    <div class="ui dropdown item">
-      Genres
-      <i class="dropdown icon"></i>
-      <div class="menu">
-        {% for genre in get_movie_genres()['genres'] %}
-          <a href="#" class="item">{{ genre['name'] }}</a>
-        {% endfor %}
-      </div>
-    </div>
-    <div class="right menu">
-      <div class="item">
-        <div class="ui action left icon input">
-          <i class="search icon"></i>
-          <input type="text" placeholder="Search" />
-          <button class="ui button">Submit</button>
+<div class="top-menu-fixed">
+  <div class="ui top fixed inverted menu">
+    <div class="header item">Movie Browser</div>
+    <a class="item" href="{{ url_for('views.index') }}">Home</a>
+      <div class="ui dropdown item">
+        Genres
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {% for genre in get_movie_genres()['genres'] %}
+            <a href="#" class="item">{{ genre['name'] }}</a>
+          {% endfor %}
         </div>
       </div>
-    {% if not current_user.is_authenticated %}
-      <a class="item" href="{{ url_for('auth.login') }}">
-        Login
-      </a>
-    {% endif %}
-    {% if current_user.is_authenticated %}
-      <a class="item" href="{{ url_for('auth.logout') }}">
-        Logout
-      </a>
-    {% endif %}
+      <div class="right menu">
+        <div class="item">
+          <div class="ui action left icon input">
+            <input type="text" id="keyword" placeholder="Search keyword..." />
+            <i class="search icon"></i>
+            <button id="submit" class="ui button">Go</button>
+          </div>
+        </div>
+      {% if not current_user.is_authenticated %}
+        <a class="item" href="{{ url_for('auth.login') }}">
+          Login
+        </a>
+      {% endif %}
+      {% if current_user.is_authenticated %}
+        <a class="item" href="{{ url_for('auth.logout') }}">
+          Logout
+        </a>
+      {% endif %}
+    </div>
   </div>
 </div>
+<script>
+  const keyword = document.getElementById('keyword')
+  const submit = document.getElementById('submit')
+  submit.addEventListener('click', function() {
+    window.location.replace('/movie/search/' + keyword.value)
+  })
+</script>

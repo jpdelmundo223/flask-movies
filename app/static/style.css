@@ -3,6 +3,11 @@
   max-width: 95%;
 }
 
+.container-2 {
+  margin: 0 auto;
+  max-width: 75%;
+}
+
 @keyframes movie {
   from {
     opacity: 50%;
@@ -60,13 +65,7 @@ h1 {
   top: 250px;
   z-index: 10;
 }
-span {
-  display: inline-block;
-  position: relative;
-  z-index: 10;
-  margin-right: 80px;
-  color: rgb(210, 210, 210);
-}
+
 .watch {
   width: 150px;
   height: 50px;
@@ -122,18 +121,15 @@ p {
 }
 
 .movie-genres {
-  color: #ffffff;
-  background-color: grey;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-  display: inline;
-  margin: 5px;
-  font-size: 12px;
+  margin-top: 10px;
 }
 
-.movie-genres:hover {
-  background-color: rgb(184, 184, 184);
+.movie-countries {
+  margin-top: 10px;
+}
+
+.movie-release-date {
+  margin-top: 10px;
 }
 
 .movie-info {
@@ -144,6 +140,10 @@ p {
 .movie-trailer {
   margin-top: 70px;
   position: relative;
+}
+
+.sidebar-menu-fixed {
+  display: none;
 }
 
 footer {
@@ -158,6 +158,10 @@ footer {
   .movie-poster img {
     width: 250px;
   }
+
+  .container-2 {
+    max-width: 80%;
+  }
 }
 
 @media (max-width: 991px) {
@@ -167,6 +171,10 @@ footer {
 
   .movie-poster img {
     width: 200px;
+  }
+
+  .container-2 {
+    max-width: 90%;
   }
 }
 
@@ -178,4 +186,74 @@ footer {
   .movie-poster img {
     width: 130px;
   }
+
+  .top-menu-fixed {
+    display: none;
+  }
+
+  .sidebar-menu-fixed {
+    display: block;
+  }
+
+  .container {
+    max-width: 95%;
+  }
+}
+
+.ui .special .cards {
+  width: 250px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 150px auto;
+  margin-top: 10px;
+}
+
+.casts-cards {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-item {
+  width: 100px;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.card-item img {
+  width: 100%;
+  height: auto;
+}
+
+.cast-name {
+  font-size: 12px;
+}
+
+.cast-role {
+  font-size: 11px;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.video-thumbnail {
+  margin: 10px;
+  width: 250px;
+  height: auto;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.video-thumbnail:hover {
+  transform: scale(1.1);
+}
+
+.video-thumbnail img {
+  width: 100%;
 }

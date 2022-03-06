@@ -42,6 +42,51 @@ $(document).ready(function () {
   });
 });
 
+$(document).ready(function () {
+  $(".owl-carousel-video").owlCarousel({
+    loop: false,
+    dots: true,
+    autoWidth: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      600: {
+        items: 3,
+      },
+      1000: {
+        items: 6,
+        loop: false,
+      },
+    },
+  });
+});
+
+$(document).ready(function () {
+  $(".owl-carousel-cast").owlCarousel({
+    loop: false,
+    dots: false,
+    nav: true,
+    autoWidth: true,
+    responsiveClass: true,
+    responsive: {
+      0: {
+        items: 2,
+      },
+      600: {
+        items: 3,
+      },
+      1000: {
+        items: 6,
+        loop: false,
+      },
+    },
+  });
+});
+
 $(".message .close").on("click", function () {
   $(this).closest(".message").transition("fade");
 });
+
+$(".ui.sidebar").sidebar("attach events", ".toggle");

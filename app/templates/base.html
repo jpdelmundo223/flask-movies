@@ -11,19 +11,37 @@
     <title>{% block title %}{% endblock %} - Flask Movies</title>
   </head>
   <body>
-      {% include 'components/navbar.html' %}
+    
+  <div class="sidebar-menu-fixed">
+    <div class="ui top fixed inverted menu">
+    <div class="header item">Movie Browser</div>
+    <div class="right menu">
+      <a class="item toggle">
+        <i class="sidebar icon "></i>
+      </a>
+    </div>
   </div>
+    <div class="ui sidebar inverted vertical right menu">
+      <a class="item" href="{{ url_for('views.index') }}">Home</a>
+      <a class="item">Genres</a>
+      <a class="item">Login</a>
+      <a class="item">Genres</a>
+      <div class="item">
+        <div class="ui action input">
+          <input type="text" placeholder="Search">
+          <div class="ui button">Go</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    {% include 'components/navbar.html' %}
           {% block content %}
           {% endblock %}
   <footer class="footer">
-    {{ genre_list }}
   </footer>
   </body>
   <script src="{{ url_for('static', filename='jquery/jquery-3.6.0.js') }}"></script>
   <script src="{{ url_for('static', filename='semantic/dist/semantic.min.js') }}"></script>
   <script src="{{ url_for('static', filename='main.js') }}"></script>
   <script src="{{ url_for('static', filename='owl-carousel/dist/owl.carousel.min.js') }}"></script>
-  <script>
-    
-  </script>
 </html>

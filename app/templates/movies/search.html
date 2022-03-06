@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    Search
+{% endblock %}
+{% block content %}
+    <div style="margin-top: 80px;">
+    </div>
+    <div class="container">
+        <section class="popular-movies">
+            <h3 class="ui dividing header">Search results for: '{{ keyword }}'</h3>
+            <div class="ui special cards" >
+              {% for movie in result %}
+                <div class="card">
+                  <div class="blurring dimmable image">
+                    <div class="ui dimmer">
+                      <div class="content">
+                        <span id="movieId" style="display: none">{{ movie.id }}</span>
+                        <div class="center">
+                          <a href="{{ url_for('views.movie_details', movie_id=movie.id) }}">
+                          <div
+                            class="ui inverted button"
+                            href="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                          >
+                            View Details
+                          </div>
+                        </a> 
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}"
+                      alt="{{ movie.poster_path }}"
+                    />
+                  </div>
+                  <div class="content">
+                    <a
+                      class="header"
+                      href="{{ url_for('views.movie_details', movie_id=movie.id) }}"
+                      >{{ movie.title }}</a
+                    >
+                    <div class="meta">
+                      <span class="date"
+                        >Date released: {{ movie.release_date[0:4] }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          </section>
+    </div>
+{% endblock %}
