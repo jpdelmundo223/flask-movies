@@ -7,7 +7,6 @@ GENRES_URL = "https://api.themoviedb.org/3/genre/movie/list"
 API_KEY = '16a1f43665a8603d33b87aee7bc14d9f'
 params = dict(api_key=API_KEY)
 
-
 def get_movie(category):
     """Helper function that will fetch all the movies 
         depending on which category the user has selected
@@ -39,6 +38,14 @@ def get_movie_trailer(movie_id):
 
 def get_movie_genres():
     r = requests.get(GENRES_URL, params=params)
+    return r.json()
+
+def search_movie(keyword):
+    r = requests.get('https://api.themoviedb.org/3/search/movie?api_key=16a1f43665a8603d33b87aee7bc14d9f&language=en-US&query={0}&page=1&include_adult=false'.format(keyword))
+    return r.json()
+
+def get_casts(movie_id):
+    r = requests.get('https://api.themoviedb.org/3/movie/{0}/credits?api_key=16a1f43665a8603d33b87aee7bc14d9f&language=en-US'.format(movie_id))
     return r.json()
 
 def sample_func():
